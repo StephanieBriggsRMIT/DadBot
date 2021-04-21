@@ -11,8 +11,8 @@ bot.on('ready', () => {
 
 bot.on('message', msg => {
 
-    if (msg.content === 'ping') {
-        msg.reply('pong');
+    if (msg.content === 'Are we there yet?') {
+        msg.reply('Not yet');
         msg.channel.send('pong');
     }
 });
