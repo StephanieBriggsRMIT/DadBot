@@ -10,7 +10,6 @@ const questions = ['Are we there yet?', 'I\'m hungry', 'Whats for dinner?']
 const answers1 = ['Nearly!', 'Hi Hungry \', I\'m dad!', 'Dirt!']
 const answers2 = ['What a silly question', 'Not this again!', 'How would I know']
 
-var mode;
 
 bot.login(token);
 bot.on('ready', () => {
@@ -19,26 +18,37 @@ bot.on('ready', () => {
 
 bot.on('message', msg => {
 
-    if (msg.content.startswith(prefix)) {
+    var mode= '';
+
+    if (msg === 'set mode two') {
+        mode= 'two'
+        console.log('mode')
+        msg.reply('set to mode two')
+        return
+    }
+   /* if (msg.content.startsWith(prefix)) {
 
         const args = msg.content.slice(prefix.length).split(/ +/);
         const command = args.shift().toLowerCase;
 
         mode = command;
-    }
+    
+   } */
 
-    if (mode === 1) {
+    if (mode === 'one') {
         for (let i = 0; i < questions.length; i++) {
             if (msg.content === questions[i]) {
                 msg.reply(answers1[i])
             }
         }
     }
-    else if (mode === 2) {
+    else if (mode === 'two') {
         for (let i = 0; i < questions.length; i++) {
             if (msg.content === questions[i]) {
                 msg.reply(answers2[i])
             }
         }
     }
+   
+
 });
