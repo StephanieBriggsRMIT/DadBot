@@ -6,9 +6,10 @@ const { Client } = require('discord.js');
 const token = process.env.DISCORDJS_BOT_TOKEN;
 const bot = new Client();
 
+
 // Question and Answer definitions
 // Make sure the below arrays are equal length!
-const questions = 
+const questions =
     ['Are we there yet?', 
     'Whats for dinner?',
     'Dad, I\'m hungry',
@@ -24,7 +25,6 @@ const answers =
     'Sure, just let me finish what I am doing',
     'How about a normal one?',
     'As soon as we can!']
-
 
 // Login to Discord
 bot.login(token);
