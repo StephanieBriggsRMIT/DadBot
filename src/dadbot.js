@@ -54,31 +54,35 @@ bot.on('message', msg => {
         const command = args[1]
 
         mode = parseInt(command);
-        msg.reply('Changed to mode: ' + modename[mode-1])
+        if (mode <= modename.length) {
+            msg.reply('Changed to mode: ' + modename[mode - 1])
+        }
+        else {
+            let messagereply = 'Invalid mode, please enter from options: \n';
 
+            for (let i = 0; i < modename.length; i++) {
+                messagereply = messagereply + (i + 1) + ' - ' + modename[i] + '\n';
+            }
+            msg.reply(messagereply)
+        }
     }
-    
+
     if (mode === 1) {
         for (let i = 0; i < questions.length; i++) {
-            if (msg.content.toLowerCase === questions[i].toLowerCase) {
+            if (msg.content.toLowerCase() === questions[i].toLowerCase()) {
                 msg.reply(answers1[i])
             }
         }
     }
-    
+
     else if (mode === 2) {
         for (let i = 0; i < questions.length; i++) {
-            if (msg.content.toLowerCase === questions[i].toLowerCase) {
+            if (msg.content.toLowerCase() === questions[i].toLowerCase()) {
                 msg.reply(answers2[i])
             }
         }
     }
-    else{
-        msg.reply ('Invalid mode, please enter from options: ')
-        for (let i=0; i<modename.length; i++){
-            msg.reply((i+1) + ' - ' + modename[i])
-        }
-    }
+
 
 
 });
