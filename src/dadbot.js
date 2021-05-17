@@ -38,7 +38,7 @@ const answers2 =
 const modename =
     ['Normal',
         'Annoyed']
- 
+
 
 // Login to Discord
 bot.login(token);
@@ -54,7 +54,7 @@ bot.on('message', msg => {
         const args = msg.content.split(" ");
         const command = args[1]
 
-        if (command === "add") { 
+        if (command === "add") {
             // Send the Message Content to the addQuestion function and post its response
             msg.reply(addQuestion(msg.content));
         }
@@ -98,7 +98,7 @@ bot.on('message', msg => {
 
 function addQuestion(message) {
     let response = '';
-    
+
     // First break the original message up to get the Question and answer after the /mode add
     let str = message.slice(10, message.length);
     let strArgs = str.split("\" \"");
@@ -118,6 +118,6 @@ function addQuestion(message) {
     }
 
     return response;
-    
+
 
 }
