@@ -38,6 +38,7 @@ const answers2 =
 const modename =
     ['Normal',
         'Annoyed']
+const easterEggMessage = 'Look, I am sick to death of answering your questions! Can you just be quiet?';
 
 // Login to Discord
 bot.login(token);
@@ -48,37 +49,42 @@ bot.on('ready', () => {
 // Monitor the messages in the channel
 bot.on('message', msg => {
 
-    if (msg.content.startsWith(prefix)) {
+    if (easterEgg()) {
+        msg.reply(easterEggMessage);
+    } else {
 
-        const args = msg.content.split(" ");
-        const command = args[1]
+        if (msg.content.startsWith(prefix)) {
 
-        mode = parseInt(command);
-        if (mode <= modename.length) {
-            msg.reply('Changed to mode: ' + modename[mode - 1])
-        }
-        else {
-            let messagereply = 'Invalid mode, please enter from options: \n';
+            const args = msg.content.split(" ");
+            const command = args[1]
 
-            for (let i = 0; i < modename.length; i++) {
-                messagereply = messagereply + (i + 1) + ' - ' + modename[i] + '\n';
+            mode = parseInt(command);
+            if (mode <= modename.length) {
+                msg.reply('Changed to mode: ' + modename[mode - 1])
             }
-            msg.reply(messagereply)
-        }
-    }
+            else {
+                let messagereply = 'Invalid mode, please enter from options: \n';
 
-    if (mode === 1) {
-        for (let i = 0; i < questions.length; i++) {
-            if (msg.content.toLowerCase() === questions[i].toLowerCase()) {
-                msg.reply(answers1[i])
+                for (let i = 0; i < modename.length; i++) {
+                    messagereply = messagereply + (i + 1) + ' - ' + modename[i] + '\n';
+                }
+                msg.reply(messagereply)
             }
         }
-    }
 
-    else if (mode === 2) {
-        for (let i = 0; i < questions.length; i++) {
-            if (msg.content.toLowerCase() === questions[i].toLowerCase()) {
-                msg.reply(answers2[i])
+        if (mode === 1) {
+            for (let i = 0; i < questions.length; i++) {
+                if (msg.content.toLowerCase() === questions[i].toLowerCase()) {
+                    msg.reply(answers1[i])
+                }
+            }
+        }
+
+        else if (mode === 2) {
+            for (let i = 0; i < questions.length; i++) {
+                if (msg.content.toLowerCase() === questions[i].toLowerCase()) {
+                    msg.reply(answers2[i])
+                }
             }
         }
     }
@@ -86,3 +92,22 @@ bot.on('message', msg => {
 
 
 });
+
+function easterEgg() {
+
+    // Get the Day of the Week (0..6)
+    const currentDate = new Date();
+    const currentDayOfWeek = currentDate.getDay();
+    console.log(currentDayOfWeek);
+
+    // Generate a Random Number between 0 and 6
+    const randomNumber = Math.floor(Math.random() * 7); 
+    console.log(randomNumber);
+
+    // if numbers match easter egg is true
+    if (currentDayOfWeek === randomNumber) {
+        return true;
+    } else {
+        return false;
+    };
+}
