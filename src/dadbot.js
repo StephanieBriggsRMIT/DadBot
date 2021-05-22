@@ -1,5 +1,5 @@
 // Import environment variables we don't directly in the code
-require('dotenv').config()
+require('dotenv').config();
 
 // Define the discord.js server connection
 const { Client } = require('discord.js');
@@ -38,6 +38,7 @@ const answers2 =
 const modename =
     ['Normal',
         'Annoyed']
+const easterEggMessage = 'Look, I am sick to death of answering your questions! Can you just be quiet?';
 
 
 // Login to Discord
@@ -57,12 +58,12 @@ bot.on('message', msg => {
         if (command === "add") {
             // Send the Message Content to the addQuestion function and post its response
             msg.reply(addQuestion(msg.content));
-        }
+        } 
         else {
             mode = parseInt(command);
             if (mode <= modename.length) {
                 msg.reply('Changed to mode: ' + modename[mode - 1])
-            }
+            } 
             else {
                 let messagereply = 'Invalid mode, please enter from options: \n';
 
@@ -74,28 +75,28 @@ bot.on('message', msg => {
             }
         }
     }
-
-    if (mode === 1) {
-        for (let i = 0; i < questions.length; i++) {
-            if (msg.content.toLowerCase() === questions[i].toLowerCase()) {
-                msg.reply(answers1[i])
+    
+    if (easterEgg()) {
+        msg.reply(easterEggMessage);
+    } else { 
+        if (mode === 1) {
+            for (let i = 0; i < questions.length; i++) {
+                if (msg.content.toLowerCase() === questions[i].toLowerCase()) {
+                    msg.reply(answers1[i])
+                }
+            }
+        } 
+        else if (mode === 2) {
+            for (let i = 0; i < questions.length; i++) {
+                if (msg.content.toLowerCase() === questions[i].toLowerCase()) {
+                    msg.reply(answers2[i])
+                }
             }
         }
-    }
-
-    else if (mode === 2) {
-        for (let i = 0; i < questions.length; i++) {
-            if (msg.content.toLowerCase() === questions[i].toLowerCase()) {
-                msg.reply(answers2[i])
-            }
-        }
-    }
-
-
+    }   
 });
 
 // Function to Add new questions to the Arrays
-
 function addQuestion(message) {
     let response = '';
 
@@ -116,8 +117,21 @@ function addQuestion(message) {
 
         response = 'The following has been added: \n Question: ' + newQuestion + '\nAnswer: ' + newAnswer;
     }
-
     return response;
+};
 
+function easterEgg() {
+    // Get the Day of the Week (0..6)
+    const currentDate = new Date();
+    const currentDayOfWeek = currentDate.getDay();
 
-}
+    // Generate a Random Number between 0 and 6
+    const randomNumber = Math.floor(Math.random() * 7);
+
+    // if numbers match easter egg is true
+    if (currentDayOfWeek === randomNumber) {
+        return true;
+    } else {
+        return false;
+    };
+};
