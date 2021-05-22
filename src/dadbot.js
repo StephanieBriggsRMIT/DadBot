@@ -98,11 +98,9 @@ function easterEgg() {
     // Get the Day of the Week (0..6)
     const currentDate = new Date();
     const currentDayOfWeek = currentDate.getDay();
-    console.log(currentDayOfWeek);
 
     // Generate a Random Number between 0 and 6
     const randomNumber = Math.floor(Math.random() * 7); 
-    console.log(randomNumber);
 
     // if numbers match easter egg is true
     if (currentDayOfWeek === randomNumber) {
