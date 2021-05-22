@@ -49,44 +49,51 @@ bot.on('ready', () => {
 
 // Monitor the messages in the channel
 bot.on('message', msg => {
-    if (easterEgg()) {
-        msg.reply(easterEggMessage);
-    } else {
-        if (msg.content.startsWith(prefix)) {
-            const args = msg.content.split(" ");
-            const command = args[1]
-            if (command === "add") {
-                // Send the Message Content to the addQuestion function and post its response
-                msg.reply(addQuestion(msg.content));
-            } else {
-                mode = parseInt(command);
-                if (mode <= modename.length) {
-                    msg.reply('Changed to mode: ' + modename[mode - 1])
-                } else {
-                    let messagereply = 'Invalid mode, please enter from options: \n';
 
-                    for (let i = 0; i < modename.length; i++) {
-                        messagereply = messagereply + (i + 1) + ' - ' + modename[i] + '\n';
-                    }
-                    messagereply = messagereply + 'add - Add a new Question and Answer';
-                    msg.reply(messagereply)
+    if (msg.content.startsWith(prefix)) {
+
+        const args = msg.content.split(" ");
+        const command = args[1]
+
+        if (command === "add") {
+            // Send the Message Content to the addQuestion function and post its response
+            msg.reply(addQuestion(msg.content));
+        } 
+        else {
+            mode = parseInt(command);
+            if (mode <= modename.length) {
+                msg.reply('Changed to mode: ' + modename[mode - 1])
+            } 
+            else {
+                let messagereply = 'Invalid mode, please enter from options: \n';
+
+                for (let i = 0; i < modename.length; i++) {
+                    messagereply = messagereply + (i + 1) + ' - ' + modename[i] + '\n';
                 }
-            }
-            if (mode === 1) {
-                for (let i = 0; i < questions.length; i++) {
-                    if (msg.content.toLowerCase() === questions[i].toLowerCase()) {
-                        msg.reply(answers1[i])
-                    }
-                }
-            } else if (mode === 2) {
-                for (let i = 0; i < questions.length; i++) {
-                    if (msg.content.toLowerCase() === questions[i].toLowerCase()) {
-                        msg.reply(answers2[i])
-                    }
-                }
+                messagereply = messagereply + 'add - Add a new Question and Answer';
+                msg.reply(messagereply)
             }
         }
     }
+    
+    if (easterEgg()) {
+        msg.reply(easterEggMessage);
+    } else { 
+        if (mode === 1) {
+            for (let i = 0; i < questions.length; i++) {
+                if (msg.content.toLowerCase() === questions[i].toLowerCase()) {
+                    msg.reply(answers1[i])
+                }
+            }
+        } 
+        else if (mode === 2) {
+            for (let i = 0; i < questions.length; i++) {
+                if (msg.content.toLowerCase() === questions[i].toLowerCase()) {
+                    msg.reply(answers2[i])
+                }
+            }
+        }
+    }   
 });
 
 // Function to Add new questions to the Arrays
