@@ -40,6 +40,7 @@ const modename =
         'Annoyed']
 const easterEggMessage = 'Look, I am sick to death of answering your questions! Can you just be quiet?';
 
+let questionTime = [null, null, null, null, null, null, null]
 
 // Login to Discord
 bot.login(token);
@@ -58,12 +59,12 @@ bot.on('message', msg => {
         if (command === "add") {
             // Send the Message Content to the addQuestion function and post its response
             msg.reply(addQuestion(msg.content));
-        } 
+        }
         else {
             mode = parseInt(command);
             if (mode <= modename.length) {
                 msg.reply('Changed to mode: ' + modename[mode - 1])
-            } 
+            }
             else {
                 let messagereply = 'Invalid mode, please enter from options: \n';
 
@@ -75,25 +76,44 @@ bot.on('message', msg => {
             }
         }
     }
-    
+
     if (easterEgg()) {
         msg.reply(easterEggMessage);
-    } else { 
+    } else {
         if (mode === 1) {
             for (let i = 0; i < questions.length; i++) {
                 if (msg.content.toLowerCase() === questions[i].toLowerCase()) {
-                    msg.reply(answers1[i])
-                }
-            }
-        } 
-        else if (mode === 2) {
-            for (let i = 0; i < questions.length; i++) {
-                if (msg.content.toLowerCase() === questions[i].toLowerCase()) {
-                    msg.reply(answers2[i])
+
+                    // Checks if question has been asked before and if array is empty
+                    // sets time of question 
+                    if (questionTime[i] === null) {
+                        questionTime[i] = Date().now
+                        msg.reply(answers1[i])
+                    }
+                    else if ((questionTime[i] + 300000) < Date().now) {
+                        msg.reply(answers1[i])
+                    } else {
+                        msg.reply('Didn\'t you just ask me that?');
+                    }
                 }
             }
         }
-    }   
+        else if (mode === 2) {
+            for (let i = 0; i < questions.length; i++) {
+                if (msg.content.toLowerCase() === questions[i].toLowerCase()) {
+                    if (questionTime[i] === null) {
+                        questionTime[i] = Date().now
+                        msg.reply(answers2[i])
+                    }
+                    else if ((questionTime[i] + 300000) < Date().now) {
+                        msg.reply(answers2[i])
+                    } else {
+                        msg.reply('Didn\'t you just ask me that?');
+                    }
+                }
+            }
+        }
+    }
 });
 
 // Function to Add new questions to the Arrays
