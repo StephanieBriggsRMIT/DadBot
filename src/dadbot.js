@@ -18,7 +18,7 @@ const questions =
         'Can I play Nintendo?',
         'Can we go to the skatepark?',
         'Can we watch a Scary Movie',
-        'When are we going camping?'];
+        'When are we going camping?']
 const answers1 =
     ['Nearly!',
         'Food!',
@@ -26,7 +26,7 @@ const answers1 =
         'Only for an hour',
         'Sure, just let me finish what I am doing',
         'How about a normal one?',
-        'As soon as we can!'];
+        'As soon as we can!']
 const answers2 =
     ['No!',
         'Whatever your given!',
@@ -34,10 +34,10 @@ const answers2 =
         'Haven\'t you played enough today?',
         'Does it look like I\'m in a position to take you to the skate park?',
         'What do YOU reckon?',
-        'Didn\'t we just get back from camping?'];
+        'Didn\'t we just get back from camping?']
 const modename =
     ['Normal',
-        'Annoyed'];
+        'Annoyed']
 const easterEggMessage = 'Look, I am sick to death of answering your questions! Can you just be quiet?';
 
 
