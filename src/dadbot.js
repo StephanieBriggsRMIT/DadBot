@@ -87,11 +87,12 @@ bot.on('message', msg => {
                     // Checks if question has been asked before and if array is empty
                     // sets time of question 
                     if (questionTime[i] === null) {
-                        questionTime[i] = Date().now
+                        questionTime[i] = Date.now()
                         msg.reply(answers1[i])
                     }
-                    else if ((questionTime[i] + 300000) < Date().now) {
+                    else if ((questionTime[i] + 300000) < Date.now()) {
                         msg.reply(answers1[i])
+                        questionTime[i] = Date.now()
                     } else {
                         msg.reply('Didn\'t you just ask me that?');
                     }
@@ -102,11 +103,12 @@ bot.on('message', msg => {
             for (let i = 0; i < questions.length; i++) {
                 if (msg.content.toLowerCase() === questions[i].toLowerCase()) {
                     if (questionTime[i] === null) {
-                        questionTime[i] = Date().now
+                        questionTime[i] = Date.now()
                         msg.reply(answers2[i])
                     }
-                    else if ((questionTime[i] + 300000) < Date().now) {
+                    else if ((questionTime[i] + 300000) < Date.now()) {
                         msg.reply(answers2[i])
+                        questionTime[i] = Date.now()
                     } else {
                         msg.reply('Didn\'t you just ask me that?');
                     }
